@@ -35,6 +35,9 @@
     "post_modal__button": {
         "message": "Finish"
     },
+    "post_modal__dismiss_aria": {
+        "message": "Dismiss the modal"
+    },
     "post_modal_hint__title": {
         "message": "Looking for Maskbook?"
     },
