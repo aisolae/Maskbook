@@ -6,7 +6,7 @@ import { renderInShadowRoot } from '../../../utils/jss/renderInShadowRoot'
 import { PostModal } from '../../../components/InjectedComponents/PostModal'
 import { MessageCenter } from '../../../utils/messages'
 import { makeStyles, Theme } from '@material-ui/core'
-import { useTwtterComponent } from '../utils/theme'
+import { useTwitterButton } from '../utils/theme'
 
 const useStyles = makeStyles((theme: Theme) => {
     const borderColor = theme.palette.type === 'dark' ? theme.palette.grey[800] : theme.palette.grey[200]
@@ -47,7 +47,7 @@ export function injectPostModalAtTwitter() {
 function PostModalAtTwitter() {
     const classes = {
         ...useStyles(),
-        button: useTwtterComponent().button,
+        ...useTwitterButton(),
     }
     const [open, setOpen] = useState(false)
     const [postText, setPostText] = useState('')
