@@ -16,7 +16,7 @@ import { useColorProvider } from '../../../utils/theme'
 import { geti18nString } from '../../../utils/i18n'
 
 import classNames from 'classnames'
-import ProviderLine from './Provider'
+import ProviderLine from './ProviderLine'
 
 interface Props {
     identity: Person
