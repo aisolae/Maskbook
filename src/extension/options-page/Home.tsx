@@ -2,6 +2,7 @@ import React from 'react'
 
 import { makeStyles, createStyles } from '@material-ui/styles'
 import {
+    Button,
     Theme,
     Typography,
     Card,
@@ -39,6 +40,7 @@ import {
 } from './DashboardDialogs/Persona'
 import { ProfileConnectStartDialog, ProfileConnectDialog } from './DashboardDialogs/Profile'
 import Buttone from '../../components/Dashboard/Buttone'
+import { ListItemProps } from '@material-ui/core/ListItem'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -52,6 +54,9 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             width: 120,
+        },
+        secondaryAction: {
+            paddingRight: 120,
         },
         actionButtons: {
             margin: theme.spacing(2),
@@ -69,6 +74,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 )
+
+const ListItemWithAction = (props: any) => {
+    const { secondaryAction } = useStyles()
+    return <ListItem classes={{ secondaryAction }} {...props} />
+}
 
 export default function DashboardHomePage() {
     const [exportLoading, setExportLoading] = React.useState(false)
@@ -111,7 +121,7 @@ export default function DashboardHomePage() {
             <section className={classes.sections}>
                 <Card raised elevation={1}>
                     <List>
-                        <ListItem key="backup-alert">
+                        <ListItemWithAction key="backup-alert">
                             <ListItemText
                                 primary="Backup Alert"
                                 secondary={
@@ -123,14 +133,14 @@ export default function DashboardHomePage() {
                             <ListItemSecondaryAction>
                                 <Buttone
                                     component={Link}
-                                    to="database/backup"
+                                    to={'database/backup'}
                                     variant="contained"
                                     color="primary"
                                     className={classes.button}>
                                     Backup
                                 </Buttone>
                             </ListItemSecondaryAction>
-                        </ListItem>
+                        </ListItemWithAction>
                     </List>
                 </Card>
                 <Typography className={classes.title} variant="h5" align="left">
@@ -139,7 +149,7 @@ export default function DashboardHomePage() {
                 {!identities.length && (
                     <Card raised elevation={1}>
                         <List disablePadding>
-                            <ListItem key="initialize">
+                            <ListItemWithAction key="initialize">
                                 <ListItemText primary="No persona was found" />
                                 <ListItemSecondaryAction>
                                     <Buttone
@@ -151,7 +161,7 @@ export default function DashboardHomePage() {
                                         Initialize
                                     </Buttone>
                                 </ListItemSecondaryAction>
-                            </ListItem>
+                            </ListItemWithAction>
                         </List>
                     </Card>
                 )}
@@ -169,7 +179,7 @@ export default function DashboardHomePage() {
                 </Typography>
                 <Card raised elevation={1}>
                     <List disablePadding>
-                        <ListItem key="persona-create">
+                        <ListItemWithAction key="persona-create">
                             <ListItemText primary="Create" secondary="Create a new persona." />
                             <ListItemSecondaryAction>
                                 <Buttone
@@ -181,9 +191,9 @@ export default function DashboardHomePage() {
                                     Create
                                 </Buttone>
                             </ListItemSecondaryAction>
-                        </ListItem>
+                        </ListItemWithAction>
                         <Divider></Divider>
-                        <ListItem key="persona-import">
+                        <ListItemWithAction key="persona-import">
                             <ListItemText primary="Import" secondary="From a previous persona backup." />
                             <ListItemSecondaryAction>
                                 <Buttone
@@ -195,7 +205,7 @@ export default function DashboardHomePage() {
                                     Import
                                 </Buttone>
                             </ListItemSecondaryAction>
-                        </ListItem>
+                        </ListItemWithAction>
                     </List>
                 </Card>
             </section>
@@ -205,7 +215,7 @@ export default function DashboardHomePage() {
                 </Typography>
                 <Card raised elevation={1}>
                     <List disablePadding>
-                        <ListItem key="dashboard-backup">
+                        <ListItemWithAction key="dashboard-backup">
                             <ListItemText
                                 primary="Backup"
                                 secondary="Create a database backup file. Do it frequently."
@@ -220,9 +230,9 @@ export default function DashboardHomePage() {
                                     Backup
                                 </Buttone>
                             </ListItemSecondaryAction>
-                        </ListItem>
+                        </ListItemWithAction>
                         <Divider></Divider>
-                        <ListItem key="dashboard-restore">
+                        <ListItemWithAction key="dashboard-restore">
                             <ListItemText primary="Restore" secondary="From a previous database backup." />
                             <ListItemSecondaryAction>
                                 <Buttone
@@ -234,9 +244,21 @@ export default function DashboardHomePage() {
                                     Restore
                                 </Buttone>
                             </ListItemSecondaryAction>
-                        </ListItem>
+                        </ListItemWithAction>
                     </List>
                 </Card>
+            </section>
+            <section className={classes.sections}>
+                DEBUG:
+                <Button color="secondary" component={Link} to="/welcome">
+                    real create persona
+                </Button>
+                <Button color="secondary" component={Link} to="/welcome?restore">
+                    real Import Persona
+                </Button>
+                <Button color="secondary" component={Link} to="/initialize">
+                    initialize
+                </Button>
             </section>
             {dialogs}
         </Container>
